@@ -4,21 +4,13 @@ import { AlertTriangle, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import FadeIn from './FadeIn';
 
-type ViolationAlertProps = {
-  studentName: string;
-  studentId: string;
-  violation: string;
-  timestamp: Date;
-  onDismiss: () => void;
-};
-
 const ViolationAlert = ({
   studentName,
   studentId,
   violation,
   timestamp,
   onDismiss,
-}: ViolationAlertProps) => {
+}) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(100);
   

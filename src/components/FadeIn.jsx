@@ -1,16 +1,6 @@
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-
-type FadeInProps = {
-  children: ReactNode;
-  delay?: number;
-  duration?: number;
-  className?: string;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'none';
-  threshold?: number;
-  once?: boolean;
-};
 
 const FadeIn = ({
   children,
@@ -20,9 +10,9 @@ const FadeIn = ({
   direction = 'up',
   threshold = 0.1,
   once = true,
-}: FadeInProps) => {
+}) => {
   const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
+  const domRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

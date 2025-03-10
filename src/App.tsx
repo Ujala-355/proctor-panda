@@ -29,7 +29,7 @@ const App = () => (
             <Route 
               path="/dashboard" 
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireRole={null}>
                   <Dashboard />
                 </ProtectedRoute>
               } 

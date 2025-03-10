@@ -6,15 +6,6 @@ import { AlertTriangle, CheckCircle, Maximize, Mic, MicOff, Smartphone } from 'l
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-type VideoFeedProps = {
-  studentName: string;
-  studentId: string;
-  onExpand?: () => void;
-  isExpanded?: boolean;
-  initialViolations?: string[];
-  className?: string;
-};
-
 const VideoFeed = ({
   studentName,
   studentId,
@@ -22,10 +13,10 @@ const VideoFeed = ({
   isExpanded = false,
   initialViolations = [],
   className,
-}: VideoFeedProps) => {
-  const [violations, setViolations] = useState<string[]>(initialViolations);
+}) => {
+  const [violations, setViolations] = useState(initialViolations);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef(null);
   
   // Mock video stream with a placeholder for demo purposes
   useEffect(() => {

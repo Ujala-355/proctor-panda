@@ -1,23 +1,7 @@
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  role: 'proctor' | 'candidate';
-};
-
-type AuthContextType = {
-  user: User | null;
-  isLoading: boolean;
-  isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-  error: string | null;
-};
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -27,10 +11,10 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Check if user is stored in localStorage
@@ -49,7 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   // Mock login function - in a real app, this would call an API
-  const login = async (email: string, password: string) => {
+  const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
     
@@ -67,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
       
       // For demo purposes, create a mock user
-      const mockUser: User = {
+      const mockUser = {
         id: '123456',
         name: email.split('@')[0],
         email,

@@ -7,11 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
-type AuthFormProps = {
-  mode: 'login' | 'register';
-};
-
-const AuthForm = ({ mode }: AuthFormProps) => {
+const AuthForm = ({ mode }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -19,9 +15,9 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const from = (location.state as any)?.from?.pathname || '/dashboard';
+  const from = location.state?.from?.pathname || '/dashboard';
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
