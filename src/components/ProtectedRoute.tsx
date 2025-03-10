@@ -2,12 +2,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 
-type ProtectedRouteProps = {
-  children: React.ReactNode;
-  requireRole?: 'proctor' | 'candidate';
-};
-
-const ProtectedRoute = ({ children, requireRole }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children, requireRole }) => {
   const { isAuthenticated, user, isLoading } = useAuth();
   const location = useLocation();
 

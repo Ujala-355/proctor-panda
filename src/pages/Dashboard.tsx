@@ -22,7 +22,7 @@ const Dashboard = () => {
       time: '10:00 AM',
       duration: '2 hours',
       participants: 35,
-      status: 'active',
+      status: 'active'
     },
     {
       id: '2',
@@ -31,7 +31,7 @@ const Dashboard = () => {
       time: '2:00 PM',
       duration: '3 hours',
       participants: 28,
-      status: 'upcoming',
+      status: 'upcoming'
     },
     {
       id: '3',
@@ -40,7 +40,7 @@ const Dashboard = () => {
       time: '9:00 AM',
       duration: '2.5 hours',
       participants: 42,
-      status: 'upcoming',
+      status: 'upcoming'
     },
     {
       id: '4',
@@ -49,7 +49,7 @@ const Dashboard = () => {
       time: '11:00 AM',
       duration: '1.5 hours',
       participants: 31,
-      status: 'completed',
+      status: 'completed'
     },
     {
       id: '5',
@@ -58,7 +58,7 @@ const Dashboard = () => {
       time: '3:00 PM',
       duration: '2 hours',
       participants: 26,
-      status: 'completed',
+      status: 'completed'
     },
   ];
   
@@ -80,7 +80,9 @@ const Dashboard = () => {
             <header className="mb-8">
               <h1 className="text-3xl font-bold">Welcome, {user?.name}</h1>
               <p className="text-muted-foreground mt-1">
-                Manage and monitor your examination sessions
+                {user?.role === 'proctor' 
+                  ? 'Manage and monitor your examination sessions' 
+                  : 'View and take your scheduled examinations'}
               </p>
             </header>
           </FadeIn>
@@ -102,10 +104,12 @@ const Dashboard = () => {
                   <Calendar className="h-4 w-4" />
                   <span>Calendar</span>
                 </Button>
-                <Button size="sm" className="gap-1">
-                  <PlusCircle className="h-4 w-4" />
-                  <span>New Exam</span>
-                </Button>
+                {user?.role === 'proctor' && (
+                  <Button size="sm" className="gap-1">
+                    <PlusCircle className="h-4 w-4" />
+                    <span>New Exam</span>
+                  </Button>
+                )}
               </div>
             </div>
           </FadeIn>

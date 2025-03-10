@@ -4,35 +4,38 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, Users } from 'lucide-react';
-
-type ExamStatus = 'upcoming' | 'active' | 'completed';
-
-type ExamCardProps = {
-  id: string;
-  title: string;
-  date: string;
-  time: string;
-  duration: string;
-  participants: number;
-  status: ExamStatus;
-};
+import { useAuth } from '@/context/AuthContext';
 
 const statusStyles = {
   upcoming: {
     color: 'bg-blue-100 text-blue-700',
-    action: 'Prepare',
+    proctor: { action: 'Prepare' },
+    candidate: { action: 'View Details' }
   },
   active: {
     color: 'bg-green-100 text-green-700',
-    action: 'Monitor Now',
+    proctor: { action: 'Monitor Now' },
+    candidate: { action: 'Take Exam' }
   },
   completed: {
     color: 'bg-gray-100 text-gray-700',
-    action: 'View Results',
+    proctor: { action: 'View Results' },
+    candidate: { action: 'View Results' }
   },
 };
 
-const ExamCard = ({ id, title, date, time, duration, participants, status }: ExamCardProps) => {
+const ExamCard = ({ id, title, date, time, duration, participants, status }) => {
+  const { user } = useAuth();
+  const userRole = user?.role || 'candidate';
+  
+  const getActionLink = () => {
+    if (userRole === 'proctor') {
+      return status === 'active' ? `/monitoring/${id}` : `/dashboard`;
+    } else {
+      return status === 'active' ? `/exam/${id}` : `/dashboard`;
+    }
+  };
+
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-md border border-border hover:border-primary/20">
       <CardHeader className="p-0">
@@ -63,12 +66,12 @@ const ExamCard = ({ id, title, date, time, duration, participants, status }: Exa
           </div>
         </div>
         
-        <Link to={status === 'active' ? `/monitoring/${id}` : `/dashboard`}>
+        <Link to={getActionLink()}>
           <Button 
             variant={status === 'active' ? 'default' : 'outline'} 
             className="w-full"
           >
-            {statusStyles[status].action}
+            {statusStyles[status][userRole].action}
           </Button>
         </Link>
       </CardContent>

@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Monitoring from "./pages/Monitoring";
+import TakeExam from "./pages/TakeExam";
+import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,11 +37,20 @@ const App = () => (
             <Route 
               path="/monitoring/:examId" 
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireRole="proctor">
                   <Monitoring />
                 </ProtectedRoute>
               } 
             />
+            <Route 
+              path="/exam/:examId" 
+              element={
+                <ProtectedRoute requireRole="candidate">
+                  <TakeExam />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
