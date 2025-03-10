@@ -45,7 +45,9 @@ const AuthForm = ({ mode }) => {
             Email
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              <Mail className="h-4 w-4 text-muted-foreground" />
+            </div>
             <Input
               id="email"
               type="email"
@@ -63,7 +65,9 @@ const AuthForm = ({ mode }) => {
             Password
           </label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              <Lock className="h-4 w-4 text-muted-foreground" />
+            </div>
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
@@ -73,19 +77,21 @@ const AuthForm = ({ mode }) => {
               placeholder="Enter your password"
               required
             />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 hover:bg-transparent"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4 text-muted-foreground" />
-              ) : (
-                <Eye className="h-4 w-4 text-muted-foreground" />
-              )}
-            </Button>
+            <div className="absolute right-1 top-1/2 -translate-y-1/2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 hover:bg-transparent"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <Eye className="h-4 w-4 text-muted-foreground" />
+                )}
+              </Button>
+            </div>
           </div>
         </div>
         
