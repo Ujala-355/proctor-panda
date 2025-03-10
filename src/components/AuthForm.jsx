@@ -40,44 +40,44 @@ const AuthForm = ({ mode }) => {
       </h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium">
+        <div className="space-y-2">
+          <label htmlFor="email" className="block text-sm font-medium">
             Email
           </label>
           <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="pl-10"
+              className="pl-10 w-full"
               placeholder="Enter your email"
               required
             />
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           </div>
         </div>
         
-        <div className="space-y-1">
-          <label htmlFor="password" className="text-sm font-medium">
+        <div className="space-y-2">
+          <label htmlFor="password" className="block text-sm font-medium">
             Password
           </label>
           <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="pl-10"
+              className="pl-10 pr-10 w-full"
               placeholder="Enter your password"
               required
             />
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8"
+              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 hover:bg-transparent"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
